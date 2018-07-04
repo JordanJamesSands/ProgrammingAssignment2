@@ -1,6 +1,6 @@
 ## Put comments here that give an overall description of what your
 ## functions do
-##The inverse and the matrix itself are stored in 'x' and 'inv' variables outside this environment
+##The inverse and the matrix itself are stored in 'x' and 'inv' respectively. These are variables defined inside the makeCacheMatrix environment
 
 
 ## Write a short comment describing this function
@@ -22,16 +22,20 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+#If the inverse is stored in 'inv' defined in the makeCacheMatrix environment, 
+#then return it. Otherwise compute and save it to 'inv' inside makeCacheMatrix
+#environment
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+    # Retrieve the saved 'inv' value
     inverseValue <- x$getInv()
     
     if(!is.null(inverseValue)) {
+        #the inverse has already been computed, return it
         print('Inverse is already cached, returning')
         return(inverseValue)
     } else {
+        #the inverse is yet to be computed, compute, save and return it
         print("need to compute inverse")
         inverse <- solve(x$get())
         x$setInv(inverse)
